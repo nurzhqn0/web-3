@@ -1,0 +1,87 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogs CRUD UI</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Blogs CRUD UI</h1>
+      <p>
+        Simple frontend for your Node.js + MongoDB API. Base URL:
+        <code class="inline" id="baseUrlLabel"></code>
+      </p>
+    </header>
+
+    <main class="container">
+      <!-- LEFT: Create / Update / Get by ID -->
+      <section class="card">
+        <h2>Create / Update</h2>
+
+        <label for="baseUrl">API Base URL</label>
+        <input id="baseUrl" placeholder="http://localhost:3000" />
+
+        <div class="row">
+          <div style="flex: 1; min-width: 180px">
+            <label for="blogId">Blog ID (for Get/Update/Delete)</label>
+            <input id="blogId" placeholder="24-char Mongo ObjectId" />
+          </div>
+          <div style="display: flex; gap: 10px; align-items: end">
+            <button class="btn secondary" id="btnGetById">GET by ID</button>
+            <button class="btn danger" id="btnDeleteById">DELETE by ID</button>
+          </div>
+        </div>
+
+        <label for="title">Title *</label>
+        <input id="title" placeholder="My blog title" />
+
+        <label for="body">Body *</label>
+        <textarea id="body" placeholder="Write your blog content..."></textarea>
+
+        <label for="author">Author (optional)</label>
+        <input id="author" placeholder="Anonymous" />
+
+        <div class="row" style="margin-top: 12px">
+          <button class="btn ok" id="btnCreate">POST /blogs (Create)</button>
+          <button class="btn" id="btnUpdate">PUT /blogs/:id (Update)</button>
+          <button class="btn secondary" id="btnClear">Clear form</button>
+        </div>
+
+        <div class="status" id="statusBox">Ready.</div>
+
+        <p class="muted" style="margin-top: 10px">
+          Tip: For PUT, you can update only one field (title/body/author) —
+          leave others empty.
+        </p>
+      </section>
+
+      <!-- RIGHT: List + Search -->
+      <section class="card">
+        <div class="toolbar">
+          <h2 style="margin: 0">Blogs</h2>
+          <div class="row">
+            <span class="pill">Total: <span id="count">0</span></span>
+            <button class="btn secondary" id="btnRefresh">
+              GET /blogs (Refresh)
+            </button>
+          </div>
+        </div>
+
+        <label for="search">Search (title/body/author)</label>
+        <input id="search" placeholder="Type to filter..." />
+
+        <div class="list" id="list"></div>
+
+        <p class="muted small" style="margin-top: 10px">
+          If you see CORS errors, make sure your backend has
+          <code class="inline">cors()</code> enabled and is running.
+        </p>
+      </section>
+    </main>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>
